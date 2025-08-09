@@ -1,6 +1,7 @@
 import RestaurentCard from "./RestaurentCard";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
 //import resList from "../../utils/mockData";
 // //import resList from "../../utils/mockData";
 
@@ -23,7 +24,7 @@ const Body = () => {
              );
         
              const json = await data.json();
-             //console.log(json);
+             console.log(json);
 
              //Optional chaining
               //setListOfRestraunts(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
@@ -46,10 +47,12 @@ const Body = () => {
                     <button onClick={()=> {
                         {/* Filter the restraunt cards and update the UI */}
                         console.log('SearchText for restaurant',searchText);
-                       const filteredRestaurant = listOfRestaurants.filter((res)=>res?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants.toLowerCase().includes(searchText.toLowerCase()));
-                       //setListOfRestraunts(filteredRestaurant);
-                       setFilteredRestaurant(filteredRestaurant);
+                       const filteredRestaurant = listOfRestaurants.filter((res)=>res?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants.toLowerCase().includes(searchText.toLowerCase()));
 
+                       //setListOfRestraunts(filteredRestaurant);
+                      
+                       setFilteredRestaurant(filteredRestaurant);
+                       
                     }}>
                         Search</button>
                 </div>
@@ -83,10 +86,14 @@ const Body = () => {
     listOfRestaurants.map((res, index) => ( */}
     {filteredRestaurant?.length > 0 ? (
     filteredRestaurant.map((res, index) => (
-        <RestaurentCard 
-            key={index} 
-            resData={res?.info} 
-        />
+        // <Link key={index} to={"/restaurants/"+ index}><RestaurentCard 
+             
+        //     resData={res?.info} 
+        // /></Link>
+
+        <Link key={res?.info?.id} to={"/restaurants/" + res?.info?.id}>
+  <RestaurentCard resData={res?.info} />
+</Link>
     ))
 ) 
 : 
@@ -95,6 +102,8 @@ const Body = () => {
       // Show fallback UI
 )
 }
+
+
     
  </div>
 

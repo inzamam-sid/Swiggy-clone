@@ -1,0 +1,107 @@
+.menu-container {
+  max-width: 800px;
+  margin: 40px auto;
+  font-family: 'Poppins', sans-serif;
+}
+
+.menu-title {
+  font-size: 20px;
+  font-weight: 600;
+  border-bottom: 4px solid #f2f2f2;
+  padding-bottom: 8px;
+  margin-bottom: 20px;
+}
+
+.menu-item {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #eee;
+  padding: 20px 0;
+}
+
+.menu-item-left {
+  flex: 1;
+  padding-right: 20px;
+}
+
+.veg-icon {
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid #0f8a00;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  margin-right: 8px;
+}
+
+.veg-icon::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  background: #0f8a00;
+  border-radius: 50%;
+}
+
+.bestseller {
+  color: #e67e22;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.item-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.item-price {
+  font-size: 14px;
+  font-weight: 500;
+  margin: 4px 0;
+}
+
+.item-rating {
+  font-size: 14px;
+  color: #4caf50;
+  font-weight: 500;
+}
+
+.item-description {
+  font-size: 13px;
+  color: #777;
+  margin-top: 6px;
+}
+
+.menu-item-right {
+  text-align: center;
+  position: relative;
+}
+
+.menu-item-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.add-btn {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  border: 1px solid #60b246;
+  color: #60b246;
+  padding: 4px 14px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.add-btn:hover {
+  background: #60b246;
+  color: white;
+}
