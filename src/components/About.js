@@ -1,6 +1,15 @@
 import UserClass from "./UserClass.js";
 import User from "./User.js";
-const About = () => {
+import { Component } from "react";
+
+
+    class About extends Component{
+        constructor(props){
+            super(props);
+            console.log("Parent constructor call");
+        }
+    render() {
+        console.log("Parent render");
     return (
         <div>
             <h1>About</h1>
@@ -9,6 +18,8 @@ const About = () => {
             <UserClass name = {"Inzamam (class)"} location={"Lucknow (class)"} />
         </div>
     );
-};
+}
+    }
+
 
 export default About;
