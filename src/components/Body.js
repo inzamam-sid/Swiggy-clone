@@ -86,10 +86,6 @@ const Body = () => {
     listOfRestaurants.map((res, index) => ( */}
     {filteredRestaurant?.length > 0 ? (
     filteredRestaurant.map((res, index) => (
-        // <Link key={index} to={"/restaurants/"+ index}><RestaurentCard 
-             
-        //     resData={res?.info} 
-        // /></Link>
 
         <Link key={res?.info?.id} to={"/restaurants/" + res?.info?.id}>
   <RestaurentCard resData={res?.info} />
