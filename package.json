@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/inzamam-sid/React-second-video#readme",
   "devDependencies": {
+    "os-browserify": "^0.3.0",
     "parcel": "^2.13.3",
     "process": "^0.11.10"
   },

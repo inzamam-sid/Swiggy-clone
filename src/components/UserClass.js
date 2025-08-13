@@ -15,7 +15,7 @@ class UserClass extends React.Component {
         };
         //console.log("Child constructor");
     }
-
+   
     async componentDidMount(){
         const data = await fetch("https://api.github.com/users/inzamam-sid");
         const json = await data.json();

@@ -99,18 +99,22 @@
 
 
 
-import { useState, useEffect } from "react";
+//import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { MENU_API } from "../../utils/constants";
+// import { MENU_API } from "../../utils/constants";
+import useRestaurantMenu from "../../utils/useRestaurantMenu";
 import "./RestaurantMenu.css";
 
-const RestaurantMenu = () => {
-  const [resInfo, setResInfo] = useState(null);
+const RestaurantMenu  = () => {
+
+  // const [resInfo, setResInfo] = useState(null);
   const { resId } = useParams();
 
-  useEffect(() => {
-    fetchMenu();
-  }, []);
+  const resInfo = useRestaurantMenu(resId);
+
+  // useEffect(() => {
+  //   fetchMenu();
+  // }, []);
 
   const fetchMenu = async () => {
     const data = await fetch(MENU_API + resId);

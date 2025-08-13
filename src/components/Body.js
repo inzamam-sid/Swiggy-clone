@@ -2,6 +2,8 @@ import RestaurentCard from "./RestaurentCard";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../../utils/useOnlineStatus";
+//import { constants } from "buffer";
 //import resList from "../../utils/mockData";
 // //import resList from "../../utils/mockData";
 
@@ -18,21 +20,33 @@ const Body = () => {
     useEffect(() => {
         fetchData();
     }, []);
-    
-    const fetchData = async () => {
-        const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=26.8466937&lng=80.94616599999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-             );
-        
-             const json = await data.json();
-             console.log(json);
+        const fetchData = async () => {
+            const data = await fetch(
+                    "https://www.swiggy.com/dapi/restaurants/list/v5?lat=26.8466937&lng=80.94616599999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+            );
 
-             //Optional chaining
-              //setListOfRestraunts(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-              setListOfRestraunts(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-              setFilteredRestaurant(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-              //setFilteredRestaurant(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+            const json = await data.json();
 
-               };
+                // Collect restaurants from multiple cards
+            let restaurants = [];
+
+            json?.data?.cards?.forEach((card) => {
+                const resList =
+                card?.card?.card?.gridElements?.infoWithStyle?.restaurants || [];
+                restaurants = [...restaurants, ...resList];
+            });
+
+                // Now restaurants array will have more than 20 items
+                setListOfRestraunts(restaurants);
+                setFilteredRestaurant(restaurants);
+                };
+
+
+
+               const onlineStatus = useOnlineStatus();
+               if(onlineStatus === false) return (
+                <h1>Look like you're ofline!! check your internet connection</h1>
+               );
     
     //// Conditional rendering           
     // if(listOfRestaurants.length === 0){
@@ -47,11 +61,12 @@ const Body = () => {
                     <button onClick={()=> {
                         {/* Filter the restraunt cards and update the UI */}
                         console.log('SearchText for restaurant',searchText);
-                       const filteredRestaurant = listOfRestaurants.filter((res)=>res?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants.toLowerCase().includes(searchText.toLowerCase()));
+                    //    const filteredRestaurant = listOfRestaurants.filter((res)=>res?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants.toLowerCase().includes(searchText.toLowerCase()));
+                            const filteredRestaurant = listOfRestaurants.filter((res) =>
+                            res?.info?.name?.toLowerCase().includes(searchText.toLowerCase())
+                                );
+                        setFilteredRestaurant(filteredRestaurant);
 
-                       //setListOfRestraunts(filteredRestaurant);
-                      
-                       setFilteredRestaurant(filteredRestaurant);
                        
                     }}>
                         Search</button>
