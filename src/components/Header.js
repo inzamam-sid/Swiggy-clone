@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import useOnlineStatus from "../../utils/useOnlineStatus";
 
 
+
 const Header = () => {
     //let btnName = "Login"; 
 
@@ -19,29 +20,29 @@ const Header = () => {
     }, [btnNameReact]);
 
     return (
-        <div className="header">
+        <div className="flex justify-between bg-pink-100 shadow-lg sm:bg-yellow-50 lg:bg-green-50">
             <div className="logo-container">
-                <img className="logo" 
+                <img className="w-56" 
                 src={LOGO_URL} />
             </div>
-            <div className="nav-items">
-                <ul>
-                    <li>Online Status: {onlineStatus? "🟢" : "🔴"}</li>
-                    <li>
+            <div className="flex items-center">
+                <ul className="flex p-4 m-4">
+                    <li className="px-4 font-bold">Online Status: {onlineStatus? "🟢" : "🔴"}</li>
+                    <li className="px-4 font-bold">
                     <Link to="/">Home</Link>
                     </li>
-                    <li>
+                    <li className="px-4 font-bold">
                         <Link to="/about">About US</Link>
                     </li>
-                    <li>
+                    <li className="px-4 font-bold">
                         <Link to="/contact">Contact US</Link>
                     </li>
-                    <li>
+                    <li className="px-4 font-bold">
                         <Link to="/grocery">Grocery</Link>
                     </li>
-                    <li>Cart</li>
+                    <li className="px-4 font-bold">Cart</li>
                     <button
-                     className="login"
+                     className="login font-bold"
                       onClick={()=>{
                         btnNameReact === "Login" ? setBtnNameReact("Logout") : setBtnNameReact("Login");
                           //console.log(btnNameReact)

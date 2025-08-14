@@ -6,6 +6,8 @@ import Body from "./components/Body";
 import Contact from "./components/Contact";
 import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
+import '../index.css'; // adjust the path if main.jsx is in src/
+
 //import Grocery from "./components/Grocery";
 //import RestaurentCard from "./components/RestaurentCard";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";

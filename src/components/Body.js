@@ -54,12 +54,12 @@ const Body = () => {
     // } 
     return listOfRestaurants.length === 0 ? <Shimmer/>:  (
         <div className="body">
-            <div className="filter">
-                <div className="search">
-                    <input type="text" className="search-box" value={searchText}onChange={(e) => {setSearchText(e.target.value);}}/>
-                    
-                    <button onClick={()=> {
-                        {/* Filter the restraunt cards and update the UI */}
+            <div className="filter flex">
+                <div className="search m-4 p-4">
+                    <input type="text" className="border border-solid border-black" value={searchText}onChange={(e) => {setSearchText(e.target.value);}}/>
+    
+                        <button className="px-4 py-2 bg-green-100 m-4 rounded-lg"
+                            onClick={()=> {
                         console.log('SearchText for restaurant',searchText);
                     //    const filteredRestaurant = listOfRestaurants.filter((res)=>res?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants.toLowerCase().includes(searchText.toLowerCase()));
                             const filteredRestaurant = listOfRestaurants.filter((res) =>
@@ -70,9 +70,12 @@ const Body = () => {
                        
                     }}>
                         Search</button>
+                    
+                    
                 </div>
-                <button
-                className="filter-btn"
+                <div className="search m-4 p-4 flex items-center">
+                    <button
+                className="px-4 py-2 bg-gray-100 rounded-lg"
                 onClick={() => {
                     const filteredList = listOfRestaurants.filter(
                         (res) => res?.info?.avgRating && res.info.avgRating > 4
@@ -83,28 +86,23 @@ const Body = () => {
                >
                 Top Rated Restaurents
                 </button>
+                </div>
+                
             </div>
            
 
  
-  <div className="res-container">
-
-        {/* {listOfRestaurants.map((res, index) => (
-    <RestaurentCard 
-        key={index} 
-        resData = {res.restaurants[0].info} // 
-    />
-))} */}
-
-
-{/* {listOfRestaurants?.length > 0 ? (
-    listOfRestaurants.map((res, index) => ( */}
+  <div className="flex flex-wrap">
     {filteredRestaurant?.length > 0 ? (
     filteredRestaurant.map((res, index) => (
 
-        <Link key={res?.info?.id} to={"/restaurants/" + res?.info?.id}>
-  <RestaurentCard resData={res?.info} />
-</Link>
+    // <Link key={res?.info?.id} to={"/restaurants/" + res?.info?.id}>
+     <Link
+        key={`${res?.info?.id}-${index}`} // ✅ unique key
+        to={"/restaurants/" + res?.info?.id}
+      >
+    <RestaurentCard resData={res?.info} />
+    </Link>
     ))
 ) 
 : 
