@@ -16,8 +16,8 @@ import UserContext from "../../utils/UserContext"; // ✅ only one ".." needed h
         //console.log("Parent render");
     return (
         <div>
-            <h1>About</h1>
-            <div>
+            <h1 className="flex items-center justify-center font-bold text-lg">About</h1>
+            <div className="flex items-center justify-center font-bold text-lg">
                 loggedIn User
                 <UserContext.Consumer>
                      {({ loggedInUser }) => (
@@ -25,9 +25,12 @@ import UserContext from "../../utils/UserContext"; // ✅ only one ".." needed h
                     )}
                 </UserContext.Consumer>
             </div>
-            <h2>This is Namaste React Web Series</h2>
-            {/* <User name = {"Inzamam (function)"}></User> */}
+            <h2 className="flex items-center justify-center font-bold text-lg">This is Namaste React Web Series</h2>
+            {/* <User name = {"Inzamam (func
+            tion)"}></User> */}
+            <div className="flex items-center justify-center p-4 m-auto font-bold ">
             <UserClass name = {"Inzamam (class)"} location={"Lucknow (class)"} />
+            </div>
         </div>
     );
 }

@@ -1,8 +1,9 @@
 import RestaurentCard from "./RestaurentCard";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../../utils/useOnlineStatus";
+import UserContext from "../../utils/UserContext";
 //import { constants } from "buffer";
 //import resList from "../../utils/mockData";
 // //import resList from "../../utils/mockData";
@@ -51,6 +52,9 @@ const Body = () => {
     // if(listOfRestaurants.length === 0){
     //     return ;
     // } 
+
+    const { loggedInUser ,setUserName} = useContext(UserContext);
+
     return listOfRestaurants.length === 0 ? <Shimmer/>:  (
         <div className="body">
             <div className="filter flex">
@@ -72,8 +76,9 @@ const Body = () => {
                     
                     
                 </div>
+               
                 <div className="search m-4 p-4 flex items-center">
-                    <button
+                <button
                 className="px-4 py-2 bg-gray-100 rounded-lg"
                 onClick={() => {
                     const filteredList = listOfRestaurants.filter(
@@ -87,6 +92,14 @@ const Body = () => {
                 </button>
                 </div>
                 
+
+                 <div className="search m-4 p-4 flex items-center">
+                    <label>User Name</label>
+                    <input className="border border-black p-2" 
+                    value={loggedInUser} 
+                    onChange={(e) => setUserName(e.target.value)}/>
+                </div>
+
             </div>
            
 

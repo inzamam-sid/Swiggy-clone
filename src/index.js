@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
@@ -7,10 +7,18 @@ import Contact from "./components/Contact";
 import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
 import '../index.css'; // adjust the path if main.jsx is in src/
+import UserContext from "../utils/UserContext";
+import { Provider } from "react-redux";
+import Body from "./components/Body";
+import Cart from "./components/Cart";
+import LandingPage from "./components/LandingPage";
+import HomePage from "./components/HomePage";
+
 
 //import Grocery from "./components/Grocery";
 //import RestaurentCard from "./components/RestaurentCard";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import appStore from "../utils/appStore";
 
 // Chunking
 // Code Spliting
@@ -24,12 +32,33 @@ const Grocery = lazy(() => import("./components/Grocery"));
 const About = lazy(() => import("./components/About"));
 
 const AppLayout = () => {
+
+    const [userName, setUserName] = useState();
+
+    // Authentication
+    useEffect(() => {
+        // Make an API call and send username and password
+        const data = {
+            name: "Inzamam Siddiqui",
+        };
+        setUserName(data.name);
+    }, [])
+
+
+
     return ( 
-    <div className="app">
-        <Header/>
-        <Outlet/>
-        
-    </div>
+        <Provider store={appStore}>
+        <UserContext.Provider value={{loggedInUser: userName, setUserName}}>
+            <div className="app">
+                <Header/>
+                <Outlet/>
+                 
+            
+            </div>
+           
+        </UserContext.Provider>
+         
+        </Provider>
     );
 };
 
@@ -59,6 +88,12 @@ const appRouter = createBrowserRouter([
                 element: <RestaurantMenu />,
 
             },
+                
+           
+             {
+                path: "/cart",
+                element: <Cart />,
+            },
           
 
         ],
@@ -66,6 +101,59 @@ const appRouter = createBrowserRouter([
     },
    
 ]);
+
+
+
+
+// const appRouter = createBrowserRouter([
+//   {
+//     path: "/",
+//     element: <LandingPage />,   // 🎯 Landing Page first
+//   },
+//   {
+//     path: "/home",              // 👈 Explicitly make it /home
+//     element: <AppLayout />,
+//     children: [
+//       {
+//         path: "",               // 👈 default child of /home
+//         element: <Body />,
+//       },
+//       {
+//         path: "about",          // 👈 now becomes /home/about
+//         element: (
+//           <Suspense fallback={<h1>Loading....</h1>}>
+//             <About />
+//           </Suspense>
+//         ),
+//       },
+    
+//       {
+//         path: "contact",        // 👈 now becomes /home/contact
+//         element: <Contact />,
+//       },
+//       {
+//         path: "grocery",
+//         element: (
+//           <Suspense fallback={<h1>Loading....</h1>}>
+//             <Grocery />
+//           </Suspense>
+//         ),
+//       },
+//       {
+//         path: "restaurants/:resId",
+//         element: <RestaurantMenu />,
+//       },
+//       {
+//         path: "cart",
+//         element: <Cart />,
+//       },
+//     ],
+//     errorElement: <Error />,
+//   },
+// ]);
+
+
+
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

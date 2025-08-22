@@ -31,3 +31,23 @@
 # 2 Types Routing in web apps
 - client side Routing
 - Server side Routing
+
+
+# 3 Redux Toolkit
+- Install @reduxjs/toolkit and react redux
+- Build our store
+- Connect our store to our app
+- Slice (cartSlice) 
+- Dispatch (action)
+- Selector
+
+
+# Setting up testing in our app
+- Install React testing library
+- Install jest
+- Install Babel dependencies
+- Configure Babel
+- Configure Parcel Config file to disable default babel transpilation
+- npx jest --init
+- Install jsdom library using this coomand("npm install --save-dev jest-environment-jsdom")
+
